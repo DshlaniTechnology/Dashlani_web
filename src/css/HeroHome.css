@@ -1,0 +1,21 @@
+/* Hero home start */
+
+.hero-home-main {
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+  }
+  
+  .slider-logo {
+    /* filter: grayscale(100%); */
+    filter: brightness(0%);
+    transition: ease-in-out .3s;
+  }
+  
+  .slider-logo:hover {
+    /* filter: grayscale(0%); */
+    filter: brightness(100%);
+    cursor: pointer;
+    transition: ease-in-out .3s;
+  }
+  
+  /* Hero home end */

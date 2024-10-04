@@ -10,6 +10,7 @@ import Contact from './Component/Contact';
 import Producttwo from './Component/Producttwo';
 import Product3 from './Component/Product3';
 import CustomCursor from './Component/Cursor';
+import Slider from './Component/Slider';
 
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
     <Header />
     <CustomCursor />
     <HeroHome />
-    {/* <Services /> */}
-    {/* <Product /> */}
+    {/* <Slider></Slider> */}
+    <Services />
+    <Product />
     <About />
     {/* <Producttwo /> */}
     {/* <Product3 /> */}
-    {/* <Contact /> */}
+    <Contact />
     {/* <ContactWithProduct /> */}
     <Footer />
   </>

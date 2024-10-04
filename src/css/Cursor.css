@@ -1,0 +1,23 @@
+/*Cursor css Start*/
+
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000f53;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease;
+}
+.custom-cursor.hover {
+    width: 30px;
+    height: 30px;
+    background-color: #000f5388;
+    border: 2px solid inherit;
+}
+
+/*Cursor css end*/

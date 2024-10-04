@@ -19,16 +19,12 @@ function Header() {
             const currentScrollY = window.scrollY;
 
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Scrolling down, hide the header
                 setSticky(false);
             } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
-                // Scrolling up or near the top, show the header
                 setSticky(true);
             }
 
             setLastScrollY(currentScrollY);
-
-            // Check if the page is scrolled to apply shadow
             setScrolled(currentScrollY > 0);
         };
 
@@ -42,7 +38,7 @@ function Header() {
     return (
         <Navbar 
             expand="lg" 
-            className={`bg-secondary-b z-3 ${scrolled ? 'shadow-b' : ''} ${sticky ? 'position-fixed sticky-header' : 'hide-header'}`}
+            className={`bg-white position-fixed z-3 ${scrolled ? 'shadow-b' : ''} ${sticky ? 'sticky-header' : 'hide-header'}`}
         >
             <Container>
                 <Navbar.Brand href="#"><Image src={Logo} alt="logo" fluid width={120} /></Navbar.Brand>

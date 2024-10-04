@@ -40,14 +40,14 @@ function Services() {
     return (
         <>
             {/* Service start */}
-            <section id='Service' className="bg-secondary-b py-80">
+            <section id='Service' className="py-80">
                 <Container>
                     <Row className='justify-content-center'>
                         <Col lg={10} className='text-center section-header'>
-                            <h3 className='fs-sm-1'>Our Services & Empowering Your <span style={{ color: "rgb(0 127 255)" }}>Business</span> with Technology</h3>
-                            {/* <p className='text-black text-opacity-50 fw-medium'>
-                                We offer a wide range of cutting-edge IT solutions designed to meet the needs of modern businesses, from software development to cloud services and beyond.
-                            </p> */}
+                            <h2 className='fw-medium fs-4 text-b fst-italic mb-1 position-relative'>Our <span>Services</span></h2>
+                            <p className='text-black fs-1 text-capitalize text-opacity-75 fw-bold'>
+                               We provide best services
+                            </p>
                         </Col>
                     </Row>
                     <Row>
@@ -56,29 +56,35 @@ function Services() {
                                 <Row className="left">
                                     <Col>
                                         <Row>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>Full Stack Development</h3>
-                                                <p>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>UI/UX Design</h3>
-                                                <p>Our UI/UX design services focus on creating intuitive and engaging user experiences. We design visually stunning interfaces that enhance usability and improve customer satisfaction.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>Cloud Solutions</h3>
-                                                <p>Leverage the power of the cloud with our scalable and secure cloud solutions. From AWS to Azure, we help businesses move to the cloud and optimize their infrastructure.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>DevOps Services</h3>
-                                                <p>Achieve seamless development and operations integration with our DevOps services. We help automate and streamline workflows, ensuring faster time-to-market and continuous delivery.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>Mobile App Development</h3>
-                                                <p>We create high-performance mobile applications for both iOS and Android platforms, using the latest frameworks like React Native and Flutter to ensure cross-platform compatibility and stunning user experiences.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
-                                            <Col lg={12} className="details d-flex flex-column justify-content-center">
-                                                <h3>Software Development</h3>
-                                                <p>We offer custom software development services tailored to meet your specific business needs. From web applications to enterprise software, our solutions are designed to optimize performance and scalability.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
+                                            <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <h3 className='mb-3' >Full Stack Development</h3>
+                                                <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
                                             </Col>
                                         </Row>
                                     </Col>

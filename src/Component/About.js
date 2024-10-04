@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import About from '../Images/about.png';
 import Circle from '../Images/Circle.png';
-import cardImg1 from '../Images/card-2-team.png';
-import wave from '../Images/wave.png';
+import cardImg5 from '../Images/out-teme-4.jpg';
+import { FaFacebook, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
+import { AiFillInstagram } from 'react-icons/ai';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { FaStar } from "react-icons/fa6";
 
 const OrangePanel = () => {
     const orangeWrapperRef = useRef(null);
@@ -20,15 +24,11 @@ const OrangePanel = () => {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Check if it's a mobile device
         const handleResize = () => {
             setIsMobile(window.innerWidth < 480);
         };
 
-        // Set the initial value
         handleResize();
-
-        // Add resize event listener
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
@@ -80,6 +80,15 @@ const OrangePanel = () => {
             t2.fromTo(lemonRef.current, { scale: 0.7 }, { scale: 1 })
                 .fromTo(lemonRef.current, { scale: 1 }, { scale: 0.7 });
             t3.fromTo(mangoRef.current, { scale: 0.7 }, { scale: 1 });
+
+        } else {
+            // Mobile animation logic for screen sizes < 480px
+            const t2 = gsap.timeline();
+            const t3 = gsap.timeline();
+
+            t2.fromTo(lemonRef.current, { scale: 0.7 }, { scale: 1 })
+                .fromTo(lemonRef.current, { scale: 1 }, { scale: 1 });
+            t3.fromTo(mangoRef.current, { scale: 1 }, { scale: 1 }); // Keep mango at scale 1
         }
 
         return () => {
@@ -87,9 +96,21 @@ const OrangePanel = () => {
         };
     }, [isMobile]);
 
+
+    const contentRef = useRef(null);
+    const [imageHeight, setImageHeight] = useState(0);
+    const [imageWidth, setImageWidth] = useState(0);
+    useEffect(() => {
+      if (contentRef.current) {
+        const contentHeight = contentRef.current.clientHeight;
+        setImageHeight(contentHeight * 1.3); // Adding 10% to the height
+        setImageWidth(contentHeight)
+      }
+    }, []);
+
     return (
         <section id='About' className='about overflow-hidden bg-b1'>
-            <div ref={orangeWrapperRef} className=''>
+            <div ref={orangeWrapperRef}>
                 <div className='bg-secondary-b py-3 w-100 overflow-hidden' ref={orangeRef}>
                     <Container className='py-80 position-relative'>
                         <h2 className='position-absolute about-title text-b text-uppercase'>About Us</h2>
@@ -103,7 +124,7 @@ const OrangePanel = () => {
                                 </span>
                             </Col>
                             <Col lg={6} md={12} sm={12} className='about-details position-relative'>
-                                <p className=' text-black text-opacity-50'>
+                                <p className='text-black text-opacity-50'>
                                     Deshlani Technology is a premier IT services provider dedicated to delivering cutting-edge solutions across a wide spectrum of digital needs. Our expertise encompasses mobile application development, website development, and both web and app designing. We excel in digital marketing, including SEO and ASO, ensuring your brand achieves maximum visibility and engagement. With proficiency in all programming languages, our team of seasoned professionals is committed to transforming your vision into reality with innovative, scalable, and efficient solutions.
                                 </p>
                                 <span className='rounded-pill about-line position-absolute'></span>
@@ -117,43 +138,439 @@ const OrangePanel = () => {
             </div>
             {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
 
-            <div ref={lemonWrapperRef} className='panel w-100 h-auto p-0' style={{ position: 'relative' }}>
-                <div className='bg-white w-100 bg-secondary-b' ref={lemonRef}>
+            <div ref={lemonWrapperRef}>
+                <div className='bg-white py-3 w-100 overflow-hidden' ref={lemonRef}>
                     <Container className='py-80 position-relative'>
                         <Row className='justify-content-center'>
-                            <Col lg={10} className='text-center section-header'>
-                                <h3>
+                            <Col lg={10} className='text-center section-header mb-3'>
+                                <h3 className='mb-1'>
                                     Our <span style={{ color: "rgb(0 127 255)" }}>Team</span>
                                 </h3>
+                                <p className='text-black fs-5'>Discover Our Professionals An Exclusive Team Dedicated to Your Success</p>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col className='text-black'>
-                                <Card className='oue-team border-0 rounded-3 overflow-hidden position-relative'>
-                                    <div className='team-img-box position-relative'>
-                                        <Card.Img variant="top" className='bg-secondary team-photo position-relative' src={cardImg1} />   
-                                        <Image src={wave} alt='team-png' className='img-fluid team-png' />  
-                                    </div>
-                                    <Card.Body className='position-absolute teme-details'>
-                                        <Card.Text className='fs-normal fs-6'>
-                                            <h3>dfsf</h3>
-                                            <p>asdfswdf</p>
+                        <Swiper slidesPerView={7}
+                            spaceBetween={30}
+                            slidesPerGroup={1}
+                            loop={true}
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: true,
+                                pauseOnMouseEnter: true,
+                            }}
+                            pagination={{
+                                el: "swiper-pagination",
+                                clickable: true, // Enables pagination bullets to be clickable
+                                bulletActiveClass: 'active-bullet', // Optional: custom active class for bullets
+                            }}
+                            breakpoints={{
+                                320: {
+                                    slidesPerView: 1,
+                                },
+                                480: {
+                                    slidesPerView: 1,
+                                },
+                                640: {
+                                    slidesPerView: 2,
+                                },
+                                768: {
+                                    slidesPerView: 2,
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                }
+                            }}
+                            modules={[Autoplay, Pagination]} className='text-black'>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                            </Col>
-                            <Col className='text-black'>423</Col>
-                            <Col className='text-black'>423</Col>
-                        </Row>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
+                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
+                                    <Card.Body className='position-absolute team-details'>
+                                        <Card.Text className='fs-normal text-white '>
+                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
+                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Body className='position-absolute team-sosial'>
+                                        <Card.Text className='fs-normal fs-6 '>
+                                            <ul className='m-0 p-0 d-flex '>
+                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
+                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
+                                            </ul>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </SwiperSlide>
+                            <div className='swiper-controler'>
+                                <div className='swiper-pagination'></div>
+                            </div>
+                        </Swiper>
                     </Container>
                 </div>
             </div>
 
             {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
 
-            <div ref={mangoWrapperRef} className='panel w-100 h-auto p-0' style={{ position: 'relative' }}>
-                <div className='bg-white w-100 vh-100' ref={mangoRef}>
+            <div ref={mangoWrapperRef} >
+                <div className='bg-secondary-b w-100 vh-sm-100 d-flex align-items-center overflow-hidden client-bg' ref={mangoRef}>
+                    <Container className='py-80'>
+                        <Row>
+                            <Col lg={4} md={12} className='d-flex justify-content-center align-items-center'>
+                                <div className='pe-sm-2'>
+                                    <h3 className='text-capitalize mb-5 text-b fw-bold' style={{ fontSize: "3rem" }}>
+                                        What's our <span style={{ color: "rgb(0 127 255)" }}>clients</span> are saying
+                                    </h3>
+                                    <p className='fs-5 fw-midium text-black text-opacity-75'>
+                                        Our clients are at the heart of everything we do. Here’s what they have to say about their experiences with us...
+                                    </p>
+                                </div>
+                            </Col>
+                            <Col lg={8} md={12}>
+                                <Swiper
+                                    slidesPerView={1.2}
+                                    centeredSlides={true}
+                                    spaceBetween={30}
+                                    loop={true}     
+                                    autoplay={{
+                                        delay: 2000,
+                                    }}  
+                                    speed={3000}
+                                    freeMode={false}
+                                    freeModeMomentum={false}
+                                    modules={[Autoplay]}
+                                >
+                                    <SwiperSlide>
+                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
+                                            <div
+                                                ref={contentRef}
+                                                className='w-100 rounded-5 d-flex align-items-center'
+                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
+                                            >
+                                                <div className='p-4'>
+                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
+                                            <div
+                                                className='position-absolute rounded-5 overflow-hidden'
+                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
+                                            >
+                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+
+                                     <SwiperSlide>
+                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
+                                            <div
+                                                ref={contentRef}
+                                                className='w-100 rounded-5 d-flex align-items-center'
+                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
+                                            >
+                                                <div className='p-4'>
+                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className='position-absolute rounded-5 overflow-hidden'
+                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
+                                            >
+                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+
+                                     <SwiperSlide>
+                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
+                                            <div
+                                                ref={contentRef}
+                                                className='w-100 rounded-5 d-flex align-items-center'
+                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
+                                            >
+                                                <div className='p-4'>
+                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className='position-absolute rounded-5 overflow-hidden'
+                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
+                                            >
+                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+
+                                     <SwiperSlide>
+                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
+                                            <div
+                                                ref={contentRef}
+                                                className='w-100 rounded-5 d-flex align-items-center'
+                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
+                                            >
+                                                <div className='p-4'>
+                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className='position-absolute rounded-5 overflow-hidden'
+                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
+                                            >
+                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+
+                                     <SwiperSlide>
+                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
+                                            <div
+                                                ref={contentRef}
+                                                className='w-100 rounded-5 d-flex align-items-center'
+                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
+                                            >
+                                                <div className='p-4'>
+                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className='position-absolute rounded-5 overflow-hidden'
+                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
+                                            >
+                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                </Swiper>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
             </div>
 

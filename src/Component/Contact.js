@@ -56,7 +56,7 @@ const Contact = () => {
   };
 
   return (
-    <section id='Contact' className='py-80 bg-secondary-b' style={{ position: 'relative' }}>
+    <section id='Contact' className='py-80' style={{ position: 'relative' }}>
       <Container>
         <Row className='justify-content-center'>
           <Col lg={10} className='text-center section-header'>

@@ -17,9 +17,9 @@ function HeroHome() {
   return (
     <>
       {/* Herohome section one start */}
-      <section className=''>
-        <Container>
-          <Row className='gy-md-4 d-flex align-items-center position-relative vh-100'>
+      <section className='Home'>
+        <Container className='py-80 pb-0'>
+          <Row className='gy-md-4 pt-lg-0 pt-5 align-items-center'>
             <Col lg={6} md={12} className='hero-home-main'>
               <h6 className='fs-5 fw-bold mb-2 text-b'>IT SERVICES PROVIDER</h6>
               <h4 className='font-monospace fs-5 mb-2'>“सब सुख लहै तुम्हारी सरना, तुम रक्षक काहू को डरना”</h4>
@@ -29,8 +29,8 @@ function HeroHome() {
                 service and exceptional results in the digital landscape.
               </p>
             </Col>
-            <Col lg={6} md={12}>
-              <Image src={HeroImage} alt="image" className='w-100' />
+            <Col lg={6} md={12} className='d-flex justify-content-center'>
+              <Image src={HeroImage} alt="image" className='img-fluid' />
             </Col>
           </Row>
         </Container>
@@ -43,12 +43,15 @@ function HeroHome() {
           slidesPerView={7}
           spaceBetween={30}
           slidesPerGroup={1}
-          loop={true}
+          loop={true}       // Loop the slides infinitely
           autoplay={{
-            delay: 2000,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
+            delay: 0,  // No delay between slides
+            disableOnInteraction: false,  // Continue autoplay after interaction
+            pauseOnMouseEnter: true,     // Don't pause on hover
           }}
+          speed={3000}
+          freeMode={false}  
+          freeModeMomentum={false} 
           breakpoints={{
             320: {
               slidesPerView: 2,
@@ -71,43 +74,33 @@ function HeroHome() {
           {/* Slides */}
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
           <SwiperSlide className='p-3 text-center slider-logo pe-auto'>
             <Image src={Logo} alt="image" fluid className='w-75' />
-
           </SwiperSlide>
         </Swiper>
       </section>
