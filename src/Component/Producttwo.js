@@ -1,87 +1,3 @@
-// import React, { useEffect } from 'react';
-// import gsap from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// function Producttwo() {
-//   useEffect(() => {
-//     gsap.registerPlugin(ScrollTrigger);
-
-//     // Create ScrollTrigger for the first line
-//     const firstLineAnimation = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: ".line-1-1", // Targeting the first line
-//         start: "top top",      // Animation starts when the top of the first line hits the top of the viewport
-//         end: "bottom top",     // Animation ends when the bottom of the first line hits the top of the viewport
-//         scrub: 1,             // Smooth scrubbing effect
-//         pin: true,             // Pin the section during the animation
-//         pinSpacing: true       // Automatically adjust spacing while pinned
-//       },
-//     });
-
-//     firstLineAnimation.fromTo(".line-1-1 .line",
-//       { scaleX: 0, transformOrigin: "left center", ease: "none" },
-//       { scaleX: 1 }
-//     );
-
-//     // Create ScrollTrigger for the second line
-//     const secondLineAnimation = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: ".line-1-2", // Targeting the second line
-//         start: "top top",      // Animation starts when the top of the second line hits the top of the viewport
-//         end: "bottom top",     // Animation ends when the bottom of the second line hits the top of the viewport
-//         scrub: 1,             // Smooth scrubbing effect
-//         pin: true,             // Pin the section during the animation
-//         pinSpacing: true       // Automatically adjust spacing while pinned
-//       },
-//     });
-
-//     secondLineAnimation.fromTo(".line-1-2 .line",
-//       { scaleX: 0, transformOrigin: "left center", ease: "none" },
-//       { scaleX: 1 , pin: 0}
-//     );
-
-//     return () => {
-//       // Cleanup on unmount
-//       firstLineAnimation.kill();
-//       secondLineAnimation.kill();
-//       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-//     };
-//   }, []);
-
-//   return (
-//     <>
-//       <section className="overflow-hidden">
-//         <div className="overflow-hidden position-relative">
-//           <div className="panel red line-1-1 vh-100 overflow-hidden">
-//             <div className="content">
-//               <p>
-//                 <span className="line"></span>
-//                 This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
-//               </p>
-//             </div>
-//           </div>
-//           {/* Spacer to ensure the next section does not overlap */}
-//           <div className='spacer vh-100'></div>
-//           <div className="panel line-1-2 vh-100 overflow-hidden" style={{ backgroundColor: 'blue' }}>
-//             <div className="content">
-//               <p>
-//                 <span className="line"></span>
-//                 This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
-//               </p>
-//             </div>
-//           </div>
-//         </div>
-
-//           <div className='spacer vh-100'></div>
-//         {/* Additional spacer to ensure proper layout */}
-//       </section>
-//     </>
-//   );
-// }
-
-// export default Producttwo;
-
-
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -169,7 +85,7 @@ function Producttwo() {
                 <Col lg={6} md={6} sm={12} className='d-flex justify-content-center align-items-center '>
                   <div className="card-11">
                     <div className="bg">
-                      <Image src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt='product' className='img-fluid' />
+                      <Image src="https://cdn.dribbble.com/userupload/6759295/file/original-cdfe63f8870fee3119f261102850c81b.jpg?resize=1600x1200" alt='product' className='img-fluid' />
                     </div>
                     <div className="blob"></div>
                   </div>
@@ -178,8 +94,9 @@ function Producttwo() {
                   <div className="p-0 overflow-hidden">
                     <div className="content px-3 ">
                         <span className="line"></span>
+                        <h2>Resume Bulider</h2>
                       <p>
-                        This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
+                        This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has 
                       </p>
                     </div>
                   </div>
@@ -194,6 +111,7 @@ function Producttwo() {
                   <div className="p-0 overflow-hidden">
                     <div className="content px-3 ">
                         <span className="line"></span>
+                        <h2>Bus Management</h2>
                       <p>
                         This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
                       </p>
@@ -203,7 +121,7 @@ function Producttwo() {
                 <Col lg={6} md={6} sm={12} className='d-flex justify-content-center align-items-center '>
                   <div className="card-11">
                     <div className="bg">
-                      <Image src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt='product' className='img-fluid' />
+                      <Image src="https://erbis.com/static/Frame1(mobile)-73f5d8ecf0c3ce4c58f846a91372a0f9.webp" alt='product' className='img-fluid' />
                     </div>
                     <div className="blob"></div>
                   </div>
@@ -217,7 +135,7 @@ function Producttwo() {
                 <Col lg={6} md={6} sm={12} className='d-flex justify-content-center align-items-center '>
                   <div className="card-11">
                     <div className="bg">
-                      <Image src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt='product' className='img-fluid' />
+                      <Image src="https://cdn.dribbble.com/users/4510782/screenshots/18106592/1_4x.png" alt='product' className='img-fluid' />
                     </div>
                     <div className="blob"></div>
                   </div>
@@ -226,6 +144,7 @@ function Producttwo() {
                   <div className="p-0 overflow-hidden">
                     <div className="content px-3 ">
                         <span className="line"></span>
+                        <h2>Kids Game</h2>
                       <p>
                         This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
                       </p>
@@ -241,6 +160,7 @@ function Producttwo() {
                   <div className="p-0 overflow-hidden">
                     <div className="content px-3 ">
                         <span className="line"></span>
+                        <h2>Prodeals</h2>
                       <p>
                         This line's animation will begin when it enters the viewport and finish when its top edge hits the top of the viewport, staying perfectly in sync with the scrollbar because it has <code>scrub:&nbsp;true</code>.
                       </p>
@@ -250,7 +170,7 @@ function Producttwo() {
                 <Col lg={6} md={6} sm={12} className='d-flex justify-content-center align-items-center '>
                   <div className="card-11">
                     <div className="bg">
-                      <Image src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt='product' className='img-fluid' />
+                      <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAPfLa5dCA9EEhH0VJ6cCveyxyvvpP1tUeOg&s" alt='product' className='img-fluid' />
                     </div>
                     <div className="blob"></div>
                   </div>

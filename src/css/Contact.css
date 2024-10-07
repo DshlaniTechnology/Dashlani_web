@@ -9,10 +9,57 @@
 .form-control:focus {
     box-shadow: none !important;
 }
+
+.main-circle-box {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+}
+
+#outer-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.ball-icons {
+    color: white;
+    font-size: 42px;
+}
+
+.center-ball {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+@media (max-width: 480px) {
+    .ball-icons {
+        font-size: 32px;
+    }
+
+    .main-circle-box {
+        width: 250px;
+        height: 250px;
+    }
+    .center-ball {
+        width: 70px;
+        height: 70px;
+    }
+}
+
 /*Contact us end*/
 
 
-/* .line {
+.line {
     display: inline-block;
     height: 10px;
     width: 100%;
@@ -87,4 +134,4 @@
     100% {
         transform: translate(-100%, -100%) translate3d(0, 0, 0);
     }
-} */
+}

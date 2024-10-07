@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+
+// imaages
+
+import AppDevlopment from '../Images/app-development.png';
+import WebSite from '../Images/world-wide-web.png';
+import GraphicDesign from '../Images/graphic-designer.png';
+import Marketing from '../Images/social-media.png';
+import Wordpress from '../Images/wordpress.png';
+import sopify from '../Images/social (1).png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +36,6 @@ function Services() {
                     pin: ".rightblock",
                     animation: animation,
                     scrub: true,
-                    markers: false,
                 });
             });
 
@@ -57,32 +65,32 @@ function Services() {
                                     <Col>
                                         <Row>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={AppDevlopment} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                            <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={WebSite} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                            <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={GraphicDesign} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                            <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={Marketing} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                            <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={sopify} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications</p>
                                             </Col>
                                             <Col lg={12} className="service-details d-flex flex-column text-center justify-content-center ">
-                                                <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'>01</div>
+                                            <div className='mx-auto mb-4 d-flex justify-content-center align-items-center'><Image src={Wordpress} alt="service" className='img-fluid' /></div>
                                                 <h3 className='mb-3' >Full Stack Development</h3>
                                                 <p className='text-black text-opacity-50'>We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.We offer full-stack development services, providing both front-end and back-end solutions. Our team is skilled in React, Angular, Node.js, Python, and more to create seamless, scalable, and robust applications.</p>
                                             </Col>

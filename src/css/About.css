@@ -175,12 +175,75 @@
     transition: all ease-in-out 0.5s;
 }
 
+#Client {
+    height: 100vh;
+}
+
 .client-bg {
     height: 100%;
     background-image: url(../Images/client-bg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.Client-card {
+    min-height: 450px;
+}
+
+.Client-box {
+    background-color: #053c73;
+    padding-left: 260px;
+}
+.client-image {
+    height: 300px;
+    width: 230px;
+    border-radius: 30px;
+    left: 30px;
+    box-shadow: 0px 0px 10px 0px #0000006b;
+}
+.client-image img{
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .client-image { 
+        width: 180px;
+        left: 20px;
+    }
+    .Client-box {
+        padding-left: 200px;
+    }
+}
+@media (max-width: 767.99px) {
+    .client-image { 
+        width: 150px;
+        height: 150px;
+        top: -75px;
+        left: 50%;
+        transform: translate(-50%);
+        border-radius: 50%;
+    }
+    .Client-box {
+        padding-left: 0;
+        padding-top: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .client-image {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+}
+
+@media (max-width: 991.99px) {
+    .Client {
+        height: auto;
+    }
 }
 
 /* our team end*/

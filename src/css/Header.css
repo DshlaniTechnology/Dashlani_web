@@ -1,4 +1,60 @@
 /* Header start */
+
+.header-link {
+    color: black !important;
+    transition: ease-in-out 0.5s;
+}
+.header-link:hover {
+    color: #0550a6 !important;
+    transition: ease-in-out 0.5s;
+}
+.header-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #0550a6;
+    border-radius: 10px;
+    left: 50%;
+    bottom: -5px;
+    opacity: 0;
+    transition: ease-in-out 0.5s;
+}
+.header-link:hover::after {
+    width: 100%;
+    left: 0%;
+    opacity: 1;
+    transition: ease-in-out 0.5s;
+}
+.navbar-nav .nav-link.active {
+    color: #0550a6 !important;
+}
+.navbar-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #0550a6;
+    border-radius: 10px;
+    left: 0%;
+    bottom: -5px;
+    opacity: 1;
+}
+.navbar-toggler {
+    border: 0 !important;
+    padding: 0 !important;
+}
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+.navbar-nav-scroll {
+    max-height: auto !important; 
+    overflow-y: auto !important;
+} 
+/* .navbar-toggler:focus .navbar-toggler-icon {
+    background-image: url(../Images/close.png);
+} */
+
 .facebook {
     color: #1877F2;
 }

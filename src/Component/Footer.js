@@ -139,7 +139,7 @@ function Footer() {
             </Col>
           </Row> 
           <div className="text-center text-white position-relative z-0 pt-3 footer-end mt-5">
-          © {getCurrentYear()} All Rights Reserved by <i className='fw-bold' style={{color: '#758ba5'}}>Deshlani Technology</i>
+          © {getCurrentYear()} All Rights Reserved by <i className='fw-bold' style={{color: '#758ba5'}}>Dashlani Technology</i>
           </div>
         </Container>
       </section>

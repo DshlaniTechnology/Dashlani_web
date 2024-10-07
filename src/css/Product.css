@@ -1,79 +1,93 @@
 /* Product start */
-#image {
-    height: 100vh;
-    width: 100% !important;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: end;
-    align-items: center;
+#image1, #image2, #image3 {
+  height: 100vh;
+  width: 100% !important;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.product .pin-spacer {
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+}
+
+#centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+#text {
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+#text div {
+  background: white;
+}
+
+h1 {
+  padding: 30px;
+}
+
+.spacer {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+.pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#image1 .pi {
+  width: 17%;
+}
+#image2 .pi {
+  width: 50%;
+}
+#image3 .pi {
+  width: 30% ;
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #image1 .pi {
+    width: 25% ;
   }
-  
-  .product .pin-spacer {
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 0 !important;
+  #image2 .pi {
+    width: 50% ;
   }
-  
-  #centered-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+  #image3 .pi {
+    width: 30% ;
   }
-  
-  #text {
-    z-index: 2;
-    display: grid;
-    place-content: center;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
+}
+
+@media (max-width: 575.98px) {
+  #image1 .pi {
+    width: 50% ;
   }
-  
-  #text div {
-    background: white;
+  #image2 .pi {
+    width: 90% ;
   }
-  
-  h1 {
-    padding: 30px;
+  #image3 .pi {
+    width: 60% ;
   }
-  
-  .spacer {
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-content: center;
-    position: relative;
-  }
-  
-  .pattern-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url();
-    background-size: cover;
-    opacity: 0;
-  }
-  
-  .pi {
-    width: 17%;
-  }
-  
-  @media (min-width: 576px) and (max-width: 992px) {
-    .pi {
-      width: 35%;
-    }
-  }
-  
-  @media (max-width: 575.98px) {
-    .pi {
-      width: 70%;
-    }
-  }
-  
-  /* Product end */
-  
+}
+
+/* Product end */

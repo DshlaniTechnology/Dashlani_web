@@ -19,19 +19,45 @@ const OrangePanel = () => {
     const lemonRef = useRef(null);
     const mangoRef = useRef(null);
     const circleRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(false);
+    const aboutRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+    const [isAboutVisible, setIsAboutVisible] = useState(false); // Track if #About is visible
+
+    // Resize handler
+    const handleResize = () => {
+        setIsMobile(window.innerWidth < 480);
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 480);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setIsAboutVisible(true);
+                } else {
+                    setIsAboutVisible(false);
+                }
+            });
+        });
+
+        if (aboutRef.current) {
+            observer.observe(aboutRef.current);
+        }
+
+        return () => {
+            if (aboutRef.current) {
+                observer.unobserve(aboutRef.current);
+            }
         };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {
@@ -96,22 +122,10 @@ const OrangePanel = () => {
         };
     }, [isMobile]);
 
-
-    const contentRef = useRef(null);
-    const [imageHeight, setImageHeight] = useState(0);
-    const [imageWidth, setImageWidth] = useState(0);
-    useEffect(() => {
-      if (contentRef.current) {
-        const contentHeight = contentRef.current.clientHeight;
-        setImageHeight(contentHeight * 1.3); // Adding 10% to the height
-        setImageWidth(contentHeight)
-      }
-    }, []);
-
     return (
-        <section id='About' className='about overflow-hidden bg-b1'>
+        <section id='About' ref={aboutRef} className='about overflow-hidden bg-b1'>
             <div ref={orangeWrapperRef}>
-                <div className='bg-secondary-b py-3 w-100 overflow-hidden' ref={orangeRef}>
+                <div className='bg-white py-3 w-100 overflow-hidden' ref={orangeRef}>
                     <Container className='py-80 position-relative'>
                         <h2 className='position-absolute about-title text-b text-uppercase'>About Us</h2>
                         <Row className='position-relative'>
@@ -135,8 +149,8 @@ const OrangePanel = () => {
                         </Row>
                     </Container>
                 </div>
+                {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
             </div>
-            {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
 
             <div ref={lemonWrapperRef}>
                 <div className='bg-white py-3 w-100 overflow-hidden' ref={lemonRef}>
@@ -146,10 +160,12 @@ const OrangePanel = () => {
                                 <h3 className='mb-1'>
                                     Our <span style={{ color: "rgb(0 127 255)" }}>Team</span>
                                 </h3>
-                                <p className='text-black fs-5'>Discover Our Professionals An Exclusive Team Dedicated to Your Success</p>
+                                <p className='text-black fs-5'>
+                                    Discover Our Professionals: An Exclusive Team Dedicated to Your Success
+                                </p>
                             </Col>
                         </Row>
-                        <Swiper slidesPerView={7}
+                        <Swiper
                             spaceBetween={30}
                             slidesPerGroup={1}
                             loop={true}
@@ -160,228 +176,259 @@ const OrangePanel = () => {
                             }}
                             pagination={{
                                 el: "swiper-pagination",
-                                clickable: true, // Enables pagination bullets to be clickable
-                                bulletActiveClass: 'active-bullet', // Optional: custom active class for bullets
+                                clickable: true,
+                                bulletActiveClass: 'active-bullet',
                             }}
                             breakpoints={{
-                                320: {
-                                    slidesPerView: 1,
-                                },
-                                480: {
-                                    slidesPerView: 1,
-                                },
-                                640: {
-                                    slidesPerView: 2,
-                                },
-                                768: {
-                                    slidesPerView: 2,
-                                },
-                                1024: {
-                                    slidesPerView: 3,
-                                }
+                                320: { slidesPerView: 1 },
+                                480: { slidesPerView: 1 },
+                                640: { slidesPerView: 2 },
+                                768: { slidesPerView: 2 },
+                                1024: { slidesPerView: 3 }
                             }}
-                            modules={[Autoplay, Pagination]} className='text-black'>
+                            modules={[Autoplay, Pagination]}
+                            className='text-black'
+                        >
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
+
                             <SwiperSlide>
                                 <Card className='our-team overflow-hidden rounded-5 position-relative'>
                                     <Card.Img variant="top" className='team-photo' src={cardImg5} />
                                     <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
+                                        <h3 className='fs-4 fw-bold text-uppercase mb-2 text-white'>
+                                            Upendra Jinjariya
+                                        </h3>
+                                        <p className='fw-bolder fs-5 mb-3 fst-italic' style={{ color: "#0080ff" }}>
+                                            Full-Stack Developer
+                                        </p>
                                     </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
-                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
-                                    <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
-                                    </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
+                                    <Card.Body className='position-absolute team-social'>
+                                        <ul className='m-0 p-0 d-flex'>
+                                            <li>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaWhatsapp className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <AiFillInstagram className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                            <li className='ps-3'>
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebook className='fs-4 team-icons' />
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </Card.Body>
                                 </Card>
                             </SwiperSlide>
-                            <SwiperSlide>
-                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
-                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
-                                    <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
-                                    </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Card className='our-team overflow-hidden rounded-5 position-relative'>
-                                    <Card.Img variant="top" className='team-photo' src={cardImg5} />
-                                    <Card.Body className='position-absolute team-details'>
-                                        <Card.Text className='fs-normal text-white '>
-                                            <h3 className='fs-4 fw-bold text-uppercase mb-2'>Upendra Jinjariya</h3>
-                                            <p className=' fw-bolder fs-5 mb-3 fst-italic ' style={{ color: "#0080ff" }}>full-stack devloper</p>
-                                        </Card.Text>
-                                    </Card.Body>
-                                    <Card.Body className='position-absolute team-sosial'>
-                                        <Card.Text className='fs-normal fs-6 '>
-                                            <ul className='m-0 p-0 d-flex '>
-                                                <li className=''><a href="#" target="_blank" rel="noopener noreferrer" /><FaLinkedinIn className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaWhatsapp className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><AiFillInstagram className='fs-4 team-icons' /></li>
-                                                <li className='ps-3'><a href="#" target="_blank" rel="noopener noreferrer" /><FaFacebook className='fs-4 team-icons' /></li>
-                                            </ul>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </SwiperSlide>
-                            <div className='swiper-controler'>
+
+                            <div className='swiper-controller'>
                                 <div className='swiper-pagination'></div>
                             </div>
                         </Swiper>
                     </Container>
                 </div>
+                {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
             </div>
 
-            {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
-
             <div ref={mangoWrapperRef} >
-                <div className='bg-secondary-b w-100 vh-sm-100 d-flex align-items-center overflow-hidden client-bg' ref={mangoRef}>
+                <div id='Client' className='bg-white w-100 vh-sm-100 d-flex align-items-center  client-bg' ref={mangoRef}>
                     <Container className='py-80'>
                         <Row>
                             <Col lg={4} md={12} className='d-flex justify-content-center align-items-center'>
@@ -399,23 +446,61 @@ const OrangePanel = () => {
                                     slidesPerView={1.2}
                                     centeredSlides={true}
                                     spaceBetween={30}
-                                    loop={true}     
-                                    autoplay={{
-                                        delay: 2000,
-                                    }}  
+                                    loop={true}
+                                    // autoplay={{
+                                    //     delay: 2000,
+                                    // }}  
                                     speed={3000}
                                     freeMode={false}
-                                    freeModeMomentum={false}
+                                    // freeModeMomentum={false}
+                                    breakpoints={{
+                                        320: {
+                                            spaceBetween: 2
+                                        },
+                                        480: {
+                                            spaceBetween: 5
+                                        },
+                                        640: {
+                                            spaceBetween: 20
+                                        },
+                                        768: {
+                                            spaceBetween: 20
+                                        },
+                                        1024: {
+                                            spaceBetween: 30
+                                        }
+                                    }}
                                     modules={[Autoplay]}
                                 >
                                     <SwiperSlide>
-                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
-                                            <div
-                                                ref={contentRef}
-                                                className='w-100 rounded-5 d-flex align-items-center'
-                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
-                                            >
-                                                <div className='p-4'>
+                                        <div className=' d-flex Client-card align-items-center'>
+                                            <div className='w-100 position-relative rounded-5 d-flex Client-box align-items-center' >
+                                                <div className='p-4 client-description'>
+                                                    <h4 className='fs-4 mb-2' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
+                                                    <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
+                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
+                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
+                                                    </p>
+                                                    <ul className='d-flex p-0 m-0 fs-6'>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                        <li><FaStar style={{ color: "yellow" }} /></li>
+                                                    </ul>
+                                                </div>
+                                                <div className='position-absolute overflow-hidden client-image'>
+                                                    <Image src={cardImg5} alt='clients' className='w-100' />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </SwiperSlide>
+
+                                    <SwiperSlide>
+                                        <div className='position-relative d-flex Client-card align-items-center'>
+                                            <div className='w-100 rounded-5 d-flex Client-box align-items-center' >
+                                                <div className='p-4 client-description'>
                                                     <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
                                                     <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
                                                     <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
@@ -430,24 +515,16 @@ const OrangePanel = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-
-                                            <div
-                                                className='position-absolute rounded-5 overflow-hidden'
-                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
-                                            >
-                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            <div className='position-absolute rounded-5 overflow-hidden client-image'>
+                                                <Image src={cardImg5} alt='clients' className='w-100' />
                                             </div>
                                         </div>
                                     </SwiperSlide>
 
-                                     <SwiperSlide>
-                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
-                                            <div
-                                                ref={contentRef}
-                                                className='w-100 rounded-5 d-flex align-items-center'
-                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
-                                            >
-                                                <div className='p-4'>
+                                    <SwiperSlide>
+                                        <div className='position-relative d-flex Client-card align-items-center'>
+                                            <div className='w-100 rounded-5 d-flex Client-box align-items-center' >
+                                                <div className='p-4 client-description'>
                                                     <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
                                                     <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
                                                     <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
@@ -462,24 +539,16 @@ const OrangePanel = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-
-                                            <div
-                                                className='position-absolute rounded-5 overflow-hidden'
-                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
-                                            >
-                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            <div className='position-absolute rounded-5 overflow-hidden client-image'>
+                                                <Image src={cardImg5} alt='clients' className='w-100' />
                                             </div>
                                         </div>
                                     </SwiperSlide>
 
-                                     <SwiperSlide>
-                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
-                                            <div
-                                                ref={contentRef}
-                                                className='w-100 rounded-5 d-flex align-items-center'
-                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
-                                            >
-                                                <div className='p-4'>
+                                    <SwiperSlide>
+                                        <div className='position-relative d-flex Client-card align-items-center'>
+                                            <div className='w-100 rounded-5 d-flex Client-box align-items-center' >
+                                                <div className='p-4 client-description'>
                                                     <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
                                                     <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
                                                     <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
@@ -494,56 +563,16 @@ const OrangePanel = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-
-                                            <div
-                                                className='position-absolute rounded-5 overflow-hidden'
-                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
-                                            >
-                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            <div className='position-absolute rounded-5 overflow-hidden client-image'>
+                                                <Image src={cardImg5} alt='clients' className='w-100' />
                                             </div>
                                         </div>
                                     </SwiperSlide>
 
-                                     <SwiperSlide>
-                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
-                                            <div
-                                                ref={contentRef}
-                                                className='w-100 rounded-5 d-flex align-items-center'
-                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
-                                            >
-                                                <div className='p-4'>
-                                                    <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
-                                                    <h6 className='fs-6 mb-4'>Co-founder of prodeals</h6>
-                                                    <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
-                                                        Working with was a pleasure from start to finish. They listened to our needs and delivered exactly what we wanted.
-                                                    </p>
-                                                    <ul className='d-flex p-0 m-0 fs-6'>
-                                                        <li><FaStar style={{ color: "yellow" }} /></li>
-                                                        <li><FaStar style={{ color: "yellow" }} /></li>
-                                                        <li><FaStar style={{ color: "yellow" }} /></li>
-                                                        <li><FaStar style={{ color: "yellow" }} /></li>
-                                                        <li><FaStar style={{ color: "yellow" }} /></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                className='position-absolute rounded-5 overflow-hidden'
-                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
-                                            >
-                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
-
-                                     <SwiperSlide>
-                                        <div className='position-relative d-flex align-items-center' style={{ minHeight: '360px' }}>
-                                            <div
-                                                ref={contentRef}
-                                                className='w-100 rounded-5 d-flex align-items-center'
-                                                style={{ backgroundColor: "#053c73", paddingLeft: `${imageWidth+ 30}px` }}
-                                            >
-                                                <div className='p-4'>
+                                    <SwiperSlide>
+                                        <div className='position-relative d-flex Client-card align-items-center'>
+                                            <div className='w-100 rounded-5 d-flex Client-box align-items-center' >
+                                                <div className='p-4 client-description'>
                                                     <h4 className='fs-4' style={{ color: "#ecf4ff" }}>Jay Viradiya</h4>
                                                     <h6 className='fs-6 mb-4 text-white'>Co-founder of prodeals</h6>
                                                     <p className='fs-6 fw-normal mb-3 text-white text-opacity-50'>
@@ -558,12 +587,8 @@ const OrangePanel = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-
-                                            <div
-                                                className='position-absolute rounded-5 overflow-hidden'
-                                                style={{ height: `${imageHeight}px`, width: `${imageWidth}px`, left: "30px" }}
-                                            >
-                                                <Image src={cardImg5} alt='clients' className='img-fluid' />
+                                            <div className='position-absolute rounded-5 overflow-hidden client-image'>
+                                                <Image src={cardImg5} alt='clients' className='w-100' />
                                             </div>
                                         </div>
                                     </SwiperSlide>
@@ -572,9 +597,9 @@ const OrangePanel = () => {
                         </Row>
                     </Container>
                 </div>
+                {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
             </div>
 
-            {!isMobile && <div className="spacer" style={{ height: '200vh' }}></div>}
         </section>
     );
 };
