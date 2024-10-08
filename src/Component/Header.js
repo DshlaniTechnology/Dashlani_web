@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import { Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-// import Logo from '../Images/BTLOGO.png';
 import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaWhatsapp } from "react-icons/fa";

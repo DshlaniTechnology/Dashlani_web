@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // imaages
-
 import AppDevlopment from '../Images/app-development.png';
 import WebSite from '../Images/world-wide-web.png';
 import GraphicDesign from '../Images/graphic-designer.png';

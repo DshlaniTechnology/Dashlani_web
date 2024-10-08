@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 import { Col, Container, Image, Row } from 'react-bootstrap';
-// import HeroImage from '../Images/bg_bg_landing.png';
-
-// Import Swiper and its required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 
