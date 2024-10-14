@@ -63,7 +63,7 @@ function Header() {
         .fromTo(".header-link", {
             y: -30,
             opacity: 0,
-            duration: 0.1,
+            duration: 0,
             // delay: 0.3,
         }, {
             y: 0,
@@ -73,7 +73,7 @@ function Header() {
         .fromTo(".navbar-icons", {
             y: -30,
             opacity: 0,
-            duration: 2,
+            duration: 0,
             // delay: 1.5
         }, {
             y: 0,
@@ -88,7 +88,7 @@ function Header() {
         }, {
             x: 0,
             opacity: 1,
-        }, ">")
+        }, "-=1.5")
         .fromTo(".hero-home-video", {
             x: 100,
             opacity: 0,
@@ -97,7 +97,7 @@ function Header() {
         }, {
             x: 0,
             opacity: 1,
-        })
+        },"-=1.5")
         .fromTo(".brand-slider", {
             y: 100,
             opacity: 0,
