@@ -55,7 +55,7 @@ function Header() {
             y: -30,
             opacity: 0,
             duration: 0.1,
-            delay: 0.35
+            // delay: 0.35
         }, {
             y: 0,
             opacity: 1,
@@ -64,7 +64,7 @@ function Header() {
             y: -30,
             opacity: 0,
             duration: 0.1,
-            delay: 0.3,
+            // delay: 0.3,
         }, {
             y: 0,
             opacity: 1,
@@ -74,7 +74,7 @@ function Header() {
             y: -30,
             opacity: 0,
             duration: 2,
-            delay: 1.5
+            // delay: 1.5
         }, {
             y: 0,
             opacity: 1,
@@ -84,7 +84,7 @@ function Header() {
             x: -100,
             opacity: 0,
             duration: 0.1,
-            delay: 0.35
+            // delay: 0.35
         }, {
             x: 0,
             opacity: 1,
@@ -93,7 +93,7 @@ function Header() {
             x: 100,
             opacity: 0,
             duration: 0.1,
-            delay: 0.35
+            // delay: 0.35
         }, {
             x: 0,
             opacity: 1,
@@ -120,7 +120,7 @@ function Header() {
             className={`bg-white position-fixed z-3 ${scrolled ? 'shadow-b' : ''} ${sticky ? 'sticky-header' : 'hide-header'}`}
         >
             <Container>
-                <Navbar.Brand href="#" className='web-logo'><h2 className='text-center fw-bold fs-4 text-b'>Deshlani<br />Technology</h2></Navbar.Brand>
+                <Navbar.Brand href="/" className='web-logo'><h2 className='text-center fw-bold fs-4 text-b'>Deshlani<br />Technology</h2></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" className='overflow-hidden' />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="mx-auto py-3 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>

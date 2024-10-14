@@ -24,7 +24,7 @@ function HeroHome() {
   return (
     <>
       {/* Herohome section one start */}
-      <section id='Home' className='py-80'>
+      <section id='Home' className='py-80 overflow-hidden'>
         <Container >
           <Row className='gy-md-4 my-0 my-sm-4 pt-lg-0 pt-5 align-items-center'>
             <Col lg={6} md={12} className='hero-home-main'>

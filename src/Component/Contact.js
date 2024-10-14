@@ -54,10 +54,10 @@ const Contact = () => {
     // return ;
     emailjs
       .send(
-        'service_5bclu69',  // Your correct EmailJS Service ID
-        'template_kqywjq3',  // Your correct EmailJS Template ID
+        'service_5bclu69', 
+        'template_kqywjq3',  
         values,
-        'PQPQhou4NhqQqTZq5'  // Your public key
+        'PQPQhou4NhqQqTZq5'
       )
       .then(
         (result) => {
@@ -74,7 +74,7 @@ const Contact = () => {
   
 
   return (
-    <section id='Contact position-relative' className='py-80'>
+    <section id='Contact' className='py-80 position-relative'>
       <Container>
         <Row className='justify-content-center'>
           <Col lg={10} className='text-center section-header mb-5'>

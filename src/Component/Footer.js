@@ -21,13 +21,13 @@ function Footer() {
               <p className='text-white text-opacity-75'>
                 Deshlani Technology is a forward-thinking IT services provider dedicated to delivering innovative digital solutions. With expertise across various technological domains, we help businesses enhance their digital presence and operational efficiency.
               </p>
-              <Button className="btn-1 border-2 position-relative overflow-hidden rounded-pill fs-5 fw-bold">Join</Button>
+              <Button className="btn-1 border-2 position-relative overflow-hidden rounded-pill fs-5 fw-bold" href='#Contact'>Join</Button>
             </Col>
             <Col lg={2} md={6} sm={6} className='text-white'>
               <h3 className="fw-medium fs-3 mb-4 footer-head position-relative">Learn More</h3>
               <ul className='m-0 p-0'>
                 <li>
-                  <a href='/home' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Home' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -35,7 +35,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/services' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Service' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -43,7 +43,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/product' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Product' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -51,7 +51,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/about-us' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#About' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -59,7 +59,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/contact-us' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Contact' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -72,7 +72,7 @@ function Footer() {
               <h3 className="fw-medium fs-3 mb-4 footer-head position-relative">Our Services</h3>
               <ul className='m-0 p-0'>
                 <li>
-                  <a href='/home' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Home' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -80,7 +80,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/services' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Service' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -88,7 +88,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/product' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Product' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -96,7 +96,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/about-us' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#About' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -104,7 +104,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href='/contact-us' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
+                  <a href='#Contact' className='custom-button link-offset-2 link-underline link-underline-opacity-0'>
                     <div className="icon_cont">
                       <span className="icon">🡪</span>
                     </div>
@@ -137,9 +137,9 @@ function Footer() {
                 </div>
               </div>
             </Col>
-          </Row> 
+          </Row>
           <div className="text-center text-white position-relative z-0 pt-3 footer-end mt-5">
-          © {getCurrentYear()} All Rights Reserved by <i className='fw-bold' style={{color: '#758ba5'}}>Dashlani Technology</i>
+            © {getCurrentYear()} All Rights Reserved by <i className='fw-bold' style={{ color: '#758ba5' }}>Dashlani Technology</i>
           </div>
         </Container>
       </section>
